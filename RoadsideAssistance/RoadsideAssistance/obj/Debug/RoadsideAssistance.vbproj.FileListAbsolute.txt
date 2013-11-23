@@ -17,3 +17,4 @@ C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistan
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.exe
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.xml
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.pdb
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.vbprojResolveAssemblyReference.cache

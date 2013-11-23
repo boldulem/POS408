@@ -63,7 +63,16 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -91,9 +100,53 @@
     </Compile>
     <Compile Include="Controller\ApplicationController.vb" />
     <Compile Include="Manager\DataManager.vb" />
-    <Compile Include="Models\ServiceCall.vb" />
     <Compile Include="Models\Contact.vb" />
+    <Compile Include="Models\Contacts.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.vb" />
+    <Compile Include="Models\Customers.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.vb" />
+    <Compile Include="Models\Locations.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\People.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Person.vb" />
+    <Compile Include="Models\Phone.vb" />
+    <Compile Include="Models\Phones.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Provider.vb" />
+    <Compile Include="Models\Providers.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roadside.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Roadside.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roadside.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Roadside.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roadside.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ServiceCall.vb" />
+    <Compile Include="Models\ServiceCalls.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Status.vb" />
+    <Compile Include="Models\Statuses.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\MockMainWindow.xaml.vb">
       <DependentUpon>MockMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -120,12 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CallLocation.vb" />
-    <Compile Include="Models\Location.vb" />
     <Compile Include="Models\NotifyBase.vb" />
-    <Compile Include="Models\Person.vb" />
-    <Compile Include="Models\Phone.vb" />
-    <Compile Include="Models\Provider.vb" />
-    <Compile Include="Models\Status.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -148,11 +196,29 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\Roadside.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Roadside.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Roadside.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Roadside.edmx</DependentUpon>
+      <LastGenOutput>Roadside.Context.vb</LastGenOutput>
+    </None>
+    <None Include="Models\Roadside.edmx.diagram">
+      <DependentUpon>Roadside.edmx</DependentUpon>
+    </None>
+    <None Include="Models\Roadside.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Roadside.edmx</DependentUpon>
+      <LastGenOutput>Roadside.vb</LastGenOutput>
+    </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <AppDesigner Include="My Project\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -182,6 +248,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

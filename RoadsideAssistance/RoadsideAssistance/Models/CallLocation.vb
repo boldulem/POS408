@@ -7,6 +7,7 @@
         End Get
         Set(ByVal value As Double)
             _latitude = value
+            Notify("Latitude")
         End Set
     End Property
 
@@ -17,6 +18,7 @@
         End Get
         Set(ByVal value As Double)
             _longitude = value
+            Notify("Logitude")
         End Set
     End Property
 
