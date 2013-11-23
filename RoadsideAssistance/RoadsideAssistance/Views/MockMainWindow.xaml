@@ -32,7 +32,7 @@
         <Label Content="Zip" HorizontalAlignment="Left" Margin="429,231,0,0" VerticalAlignment="Top"/>
         <Label Content="Phone" HorizontalAlignment="Left" Margin="269,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.154"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="56" Margin="10,309,0,-3" Stroke="Black" VerticalAlignment="Top" Width="363"/>
-        <Label Content="Location" HorizontalAlignment="Left" Margin="10,283,0,0" VerticalAlignment="Top"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="10,283,0,0" VerticalAlignment="Top"/>
         <Label Content="Provider" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,0.538"/>
         <Label Content="Date/Time" HorizontalAlignment="Left" Margin="82,309,0,0" VerticalAlignment="Top"/>
         <Label Content="Status" HorizontalAlignment="Left" Margin="153,309,0,0" VerticalAlignment="Top"/>
