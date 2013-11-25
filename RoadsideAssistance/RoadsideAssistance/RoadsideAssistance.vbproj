@@ -90,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MockMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -146,6 +150,9 @@
     <Compile Include="Models\Status.vb" />
     <Compile Include="Models\Statuses.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MockMainWindow.xaml.vb">
       <DependentUpon>MockMainWindow.xaml</DependentUpon>

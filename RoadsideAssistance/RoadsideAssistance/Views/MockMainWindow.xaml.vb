@@ -1,3 +1,3 @@
-﻿Class MainWindow 
+﻿Class MockMainWindow
 
 End Class
