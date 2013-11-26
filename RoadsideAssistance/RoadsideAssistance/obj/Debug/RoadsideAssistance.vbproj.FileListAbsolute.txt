@@ -6,8 +6,6 @@ C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistan
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.exe
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.pdb
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.xml
-C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Views\MockMainWindow.baml
-C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Views\MockMainWindow.g.vb
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Application.g.vb
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance_Content.g.vb
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance_MarkupCompile.cache
@@ -18,3 +16,9 @@ C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistan
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.xml
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.pdb
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\RoadsideAssistance.vbprojResolveAssemblyReference.cache
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\EntityFramework.dll
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\EntityFramework.xml
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Views\MainWindow.baml
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Views\MainWindow.g.vb

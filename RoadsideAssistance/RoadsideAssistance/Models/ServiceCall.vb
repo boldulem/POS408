@@ -1,4 +1,6 @@
-﻿Public Class ServiceCall : Inherits NotifyBase
+﻿Imports System.Collections.ObjectModel
+
+Public Class ServiceCall : Inherits NotifyBase
 
     Private _id As Integer
     Public Property ID() As Integer
@@ -101,12 +103,12 @@
         End Set
     End Property
 
-    Private _statuses As Status
-    Public Property Statuses() As Status
+    Private _statuses As ObservableCollection(Of Status)
+    Public Property Statuses() As ObservableCollection(Of Status)
         Get
             Return _statuses
         End Get
-        Set(ByVal value As Status)
+        Set(ByVal value As ObservableCollection(Of Status))
             _statuses = value
             Notify("Statuses")
         End Set
