@@ -2,6 +2,11 @@
 
 Public Class Provider : Inherits NotifyBase
 
+    Public Sub New()
+        Location = New Location()
+        Contacts = New ObservableCollection(Of Contact)
+    End Sub
+
     Private _id As Integer
     Public Property ID() As Integer
         Get
@@ -56,12 +61,12 @@ Public Class Provider : Inherits NotifyBase
         End Set
     End Property
 
-    Private _contacts As ObservableCollection(Of Contacts)
-    Public Property Contacts() As ObservableCollection(Of Contacts)
+    Private _contacts As ObservableCollection(Of Contact)
+    Public Property Contacts() As ObservableCollection(Of Contact)
         Get
             Return _contacts
         End Get
-        Set(ByVal value As ObservableCollection(Of Contacts))
+        Set(ByVal value As ObservableCollection(Of Contact))
             _contacts = value
         End Set
     End Property

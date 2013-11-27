@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RoadsideModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LocationPhones">
+    <Key>
+      <PropertyRef Name="LocationId" />
+      <PropertyRef Name="PhoneId" />
+    </Key>
+    <Property Name="LocationId" Type="int" Nullable="false" />
+    <Property Name="PhoneId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Zip" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Latitude" Type="numeric" Precision="12" Scale="9" />
+    <Property Name="Longitude" Type="numeric" Precision="12" Scale="9" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Phones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Number" Type="bigint" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="14" />
+  </EntityType>
+  <EntityType Name="ProviderContacts">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="ContactId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Providers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Website" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServiceCalls">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TimeOf" Type="datetime" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="Contract" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Equipment" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Issue" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Description" Type="text" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ServiceCall_Id" Type="int" Nullable="false" />
+    <Property Name="ProviderID" Type="int" Nullable="false" />
+    <Property Name="TimeOf" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Comments" Type="text" />
+  </EntityType>
+  <Association Name="FK_Contacts_ToPeople">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacts">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_ToLocation">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_ToPeople">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocationPhones_ToLocations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="LocationPhones" Type="Self.LocationPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocationPhones">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocationPhones_ToPhones">
+    <End Role="Phones" Type="Self.Phones" Multiplicity="1" />
+    <End Role="LocationPhones" Type="Self.LocationPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocationPhones">
+        <PropertyRef Name="PhoneId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProviderContacts_ToContacts">
+    <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+    <End Role="ProviderContacts" Type="Self.ProviderContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contacts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProviderContacts">
+        <PropertyRef Name="ContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProviderContacts_ToProvider">
+    <End Role="Providers" Type="Self.Providers" Multiplicity="1" />
+    <End Role="ProviderContacts" Type="Self.ProviderContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Providers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProviderContacts">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Providers_ToLocations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Providers">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceCalls_ToCustomer">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceCalls">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceCalls_ToLocation">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceCalls">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statuses_ToProvider">
+    <End Role="Providers" Type="Self.Providers" Multiplicity="1" />
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Providers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statuses">
+        <PropertyRef Name="ProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statuses_ToServiceCall">
+    <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="1" />
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceCalls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statuses">
+        <PropertyRef Name="ServiceCall_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RoadsideModelStoreContainer">
+    <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationPhones" EntityType="Self.LocationPhones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phones" EntityType="Self.Phones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProviderContacts" EntityType="Self.ProviderContacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Providers" EntityType="Self.Providers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceCalls" EntityType="Self.ServiceCalls" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Contacts_ToPeople" Association="Self.FK_Contacts_ToPeople">
+      <End Role="People" EntitySet="People" />
+      <End Role="Contacts" EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_ToLocation" Association="Self.FK_Customers_ToLocation">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_ToPeople" Association="Self.FK_Customers_ToPeople">
+      <End Role="People" EntitySet="People" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocationPhones_ToLocations" Association="Self.FK_LocationPhones_ToLocations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="LocationPhones" EntitySet="LocationPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocationPhones_ToPhones" Association="Self.FK_LocationPhones_ToPhones">
+      <End Role="Phones" EntitySet="Phones" />
+      <End Role="LocationPhones" EntitySet="LocationPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProviderContacts_ToContacts" Association="Self.FK_ProviderContacts_ToContacts">
+      <End Role="Contacts" EntitySet="Contacts" />
+      <End Role="ProviderContacts" EntitySet="ProviderContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProviderContacts_ToProvider" Association="Self.FK_ProviderContacts_ToProvider">
+      <End Role="Providers" EntitySet="Providers" />
+      <End Role="ProviderContacts" EntitySet="ProviderContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Providers_ToLocations" Association="Self.FK_Providers_ToLocations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Providers" EntitySet="Providers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceCalls_ToCustomer" Association="Self.FK_ServiceCalls_ToCustomer">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="ServiceCalls" EntitySet="ServiceCalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceCalls_ToLocation" Association="Self.FK_ServiceCalls_ToLocation">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="ServiceCalls" EntitySet="ServiceCalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statuses_ToProvider" Association="Self.FK_Statuses_ToProvider">
+      <End Role="Providers" EntitySet="Providers" />
+      <End Role="Statuses" EntitySet="Statuses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statuses_ToServiceCall" Association="Self.FK_Statuses_ToServiceCall">
+      <End Role="ServiceCalls" EntitySet="ServiceCalls" />
+      <End Role="Statuses" EntitySet="Statuses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

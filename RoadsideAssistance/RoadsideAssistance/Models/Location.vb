@@ -2,6 +2,10 @@
 
 Public Class Location : Inherits NotifyBase
 
+    Public Sub New()
+        Phones = New ObservableCollection(Of Phone)
+    End Sub
+
     Private _id As Integer
     Public Property ID() As Integer
         Get
@@ -66,6 +70,5 @@ Public Class Location : Inherits NotifyBase
             _phones = value
         End Set
     End Property
-
 
 End Class

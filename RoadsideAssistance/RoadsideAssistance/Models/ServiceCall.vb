@@ -2,6 +2,11 @@
 
 Public Class ServiceCall : Inherits NotifyBase
 
+    Public Sub New()
+        CallLocation = New CallLocation()
+        Statuses = New ObservableCollection(Of Status)
+    End Sub
+
     Private _id As Integer
     Public Property ID() As Integer
         Get
@@ -10,17 +15,6 @@ Public Class ServiceCall : Inherits NotifyBase
         Set(ByVal value As Integer)
             _id = value
             Notify("ID")
-        End Set
-    End Property
-
-    Private _provider As Provider
-    Public Property Provider() As Provider
-        Get
-            Return _provider
-        End Get
-        Set(ByVal value As Provider)
-            _provider = value
-            Notify("Provider")
         End Set
     End Property
 

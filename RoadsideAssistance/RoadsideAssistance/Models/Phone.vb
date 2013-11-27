@@ -1,5 +1,9 @@
 ﻿Public Class Phone : Inherits NotifyBase
 
+    Public Sub New()
+
+    End Sub
+
     Private _id As Integer
     Public Property ID() As Integer
         Get

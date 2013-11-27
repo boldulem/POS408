@@ -1,5 +1,9 @@
 ﻿Public Class Customer : Inherits Person
 
+    Public Sub New()
+        Location = New Location()
+    End Sub
+
     Private _customerID As Integer
     Public Property CustomerID() As Integer
         Get

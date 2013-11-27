@@ -1,5 +1,9 @@
 ﻿Public Class Contact : Inherits Person
 
+    Public Sub New()
+
+    End Sub
+
     Private _contactID As Integer
     Public Property ContactID() As Integer
         Get

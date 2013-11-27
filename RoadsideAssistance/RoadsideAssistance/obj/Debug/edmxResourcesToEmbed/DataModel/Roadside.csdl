@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RoadsideModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="ProviderId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="People" Relationship="Self.FK_Contacts_ToPeople" FromRole="Contacts" ToRole="People" />
+    <NavigationProperty Name="Providers" Relationship="Self.ProviderContacts" FromRole="Contacts" ToRole="Providers" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Customers_ToLocation" FromRole="Customers" ToRole="Locations" />
+    <NavigationProperty Name="People" Relationship="Self.FK_Customers_ToPeople" FromRole="Customers" ToRole="People" />
+    <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_ServiceCalls_ToCustomer" FromRole="Customers" ToRole="ServiceCalls" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Latitude" Type="Decimal" Precision="12" Scale="9" />
+    <Property Name="Longitude" Type="Decimal" Precision="12" Scale="9" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToLocation" FromRole="Locations" ToRole="Customers" />
+    <NavigationProperty Name="Providers" Relationship="Self.FK_Providers_ToLocations" FromRole="Locations" ToRole="Providers" />
+    <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_ServiceCalls_ToLocation" FromRole="Locations" ToRole="ServiceCalls" />
+    <NavigationProperty Name="Phones" Relationship="Self.LocationPhones" FromRole="Locations" ToRole="Phones" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Contacts" Relationship="Self.FK_Contacts_ToPeople" FromRole="People" ToRole="Contacts" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToPeople" FromRole="People" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Phones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Number" Type="Int64" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Locations" Relationship="Self.LocationPhones" FromRole="Phones" ToRole="Locations" />
+  </EntityType>
+  <EntityType Name="Providers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Providers_ToLocations" FromRole="Providers" ToRole="Locations" />
+    <NavigationProperty Name="Statuses" Relationship="Self.FK_Statuses_ToProvider" FromRole="Providers" ToRole="Statuses" />
+    <NavigationProperty Name="Contacts" Relationship="Self.ProviderContacts" FromRole="Providers" ToRole="Contacts" />
+  </EntityType>
+  <EntityType Name="ServiceCalls">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="TimeOf" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="Contract" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Equipment" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Issue" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_ServiceCalls_ToCustomer" FromRole="ServiceCalls" ToRole="Customers" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_ServiceCalls_ToLocation" FromRole="ServiceCalls" ToRole="Locations" />
+    <NavigationProperty Name="Statuses" Relationship="Self.FK_Statuses_ToServiceCall" FromRole="ServiceCalls" ToRole="Statuses" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ServiceCall_Id" Type="Int32" Nullable="false" />
+    <Property Name="ProviderID" Type="Int32" Nullable="false" />
+    <Property Name="TimeOf" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Providers" Relationship="Self.FK_Statuses_ToProvider" FromRole="Statuses" ToRole="Providers" />
+    <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_Statuses_ToServiceCall" FromRole="Statuses" ToRole="ServiceCalls" />
+  </EntityType>
+  <Association Name="FK_Contacts_ToPeople">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacts">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_ToLocation">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_ToPeople">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceCalls_ToCustomer">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceCalls">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Providers_ToLocations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Providers">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceCalls_ToLocation">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceCalls">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statuses_ToProvider">
+    <End Role="Providers" Type="Self.Providers" Multiplicity="1" />
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Providers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statuses">
+        <PropertyRef Name="ProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statuses_ToServiceCall">
+    <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="1" />
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceCalls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statuses">
+        <PropertyRef Name="ServiceCall_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LocationPhones">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
+    <End Role="Phones" Type="Self.Phones" Multiplicity="*" />
+  </Association>
+  <Association Name="ProviderContacts">
+    <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+    <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="RoadsideEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Contacts" EntityType="Self.Contacts" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" />
+    <EntitySet Name="People" EntityType="Self.People" />
+    <EntitySet Name="Phones" EntityType="Self.Phones" />
+    <EntitySet Name="Providers" EntityType="Self.Providers" />
+    <EntitySet Name="ServiceCalls" EntityType="Self.ServiceCalls" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+    <AssociationSet Name="FK_Contacts_ToPeople" Association="Self.FK_Contacts_ToPeople">
+      <End Role="People" EntitySet="People" />
+      <End Role="Contacts" EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_ToLocation" Association="Self.FK_Customers_ToLocation">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_ToPeople" Association="Self.FK_Customers_ToPeople">
+      <End Role="People" EntitySet="People" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceCalls_ToCustomer" Association="Self.FK_ServiceCalls_ToCustomer">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="ServiceCalls" EntitySet="ServiceCalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Providers_ToLocations" Association="Self.FK_Providers_ToLocations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Providers" EntitySet="Providers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceCalls_ToLocation" Association="Self.FK_ServiceCalls_ToLocation">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="ServiceCalls" EntitySet="ServiceCalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statuses_ToProvider" Association="Self.FK_Statuses_ToProvider">
+      <End Role="Providers" EntitySet="Providers" />
+      <End Role="Statuses" EntitySet="Statuses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statuses_ToServiceCall" Association="Self.FK_Statuses_ToServiceCall">
+      <End Role="ServiceCalls" EntitySet="ServiceCalls" />
+      <End Role="Statuses" EntitySet="Statuses" />
+    </AssociationSet>
+    <AssociationSet Name="LocationPhones" Association="Self.LocationPhones">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Phones" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="ProviderContacts" Association="Self.ProviderContacts">
+      <End Role="Contacts" EntitySet="Contacts" />
+      <End Role="Providers" EntitySet="Providers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,6 +1,11 @@
 ﻿Imports System.Collections.ObjectModel
 
 Public Class Person : Inherits NotifyBase
+
+    Public Sub New()
+
+    End Sub
+
     Private _id As Integer
     Public Property ID() As Integer
         Get

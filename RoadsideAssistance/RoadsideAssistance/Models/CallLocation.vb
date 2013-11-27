@@ -1,5 +1,9 @@
 ﻿Public Class CallLocation : Inherits Location
 
+    Public Sub New()
+
+    End Sub
+
     Private _latitude As Double
     Public Property Latitude() As Double
         Get
@@ -18,12 +22,7 @@
         End Get
         Set(ByVal value As Double)
             _longitude = value
-            Notify("Logitude")
+            Notify("Longitude")
         End Set
     End Property
-
-    Public Sub New()
-
-    End Sub
-
 End Class
