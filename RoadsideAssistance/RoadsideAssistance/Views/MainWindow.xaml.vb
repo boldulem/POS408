@@ -1,6 +1,6 @@
 ﻿Public Class MainWindow
 
-    Private _appControl As ApplicationController
+    Public _appControl As ApplicationController
 
     Public Sub New()
         _appControl = New ApplicationController()

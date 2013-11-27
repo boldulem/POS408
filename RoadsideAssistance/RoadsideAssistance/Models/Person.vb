@@ -45,14 +45,4 @@ Public Class Person : Inherits NotifyBase
         End Set
     End Property
 
-    Private _phones As ObservableCollection(Of Phone)
-    Public Property Phones() As ObservableCollection(Of Phone)
-        Get
-            Return _phones
-        End Get
-        Set(ByVal value As ObservableCollection(Of Phone))
-            _phones = value
-        End Set
-    End Property
-
 End Class

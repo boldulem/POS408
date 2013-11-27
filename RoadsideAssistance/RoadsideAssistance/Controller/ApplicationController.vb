@@ -15,39 +15,6 @@ Public Class ApplicationController : Inherits NotifyBase
         End Set
     End Property
 
-    'Private _callLocation As Location
-    'Public Property CallLocation() As Location
-    '    Get
-    '        Return _callLocation
-    '    End Get
-    '    Set(ByVal value As Location)
-    '        _callLocation = value
-    '        Notify("CallLocation")
-    '    End Set
-    'End Property
-
-    'Private _callCustomer As Customer
-    'Public Property CallCustomer() As Customer
-    '    Get
-    '        Return _callCustomer
-    '    End Get
-    '    Set(ByVal value As Customer)
-    '        _callCustomer = value
-    '        Notify("CallCustomer")
-    '    End Set
-    'End Property
-
-    Private _customerList As ObservableCollection(Of Customer)
-    Public Property CustomerList() As ObservableCollection(Of Customer)
-        Get
-            Return _customerList
-        End Get
-        Set(ByVal value As ObservableCollection(Of Customer))
-            _customerList = value
-            Notify("CustomerList")
-        End Set
-    End Property
-
     Private _providerList As ObservableCollection(Of Provider)
     Public Property ProviderList() As ObservableCollection(Of Provider)
         Get
@@ -59,22 +26,9 @@ Public Class ApplicationController : Inherits NotifyBase
         End Set
     End Property
 
-    Private _statuses As ObservableCollection(Of Status)
-    Public Property Statuses() As ObservableCollection(Of Status)
-        Get
-            Return _statuses
-        End Get
-        Set(ByVal value As ObservableCollection(Of Status))
-            _statuses = value
-            Notify("Statuses")
-        End Set
-    End Property
-
     Public Sub New()
-        CustomerList = New ObservableCollection(Of Customer)
         ProviderList = New ObservableCollection(Of Provider)
         InitializeProviders()
-        InitializeCustomers()
         InitializeContacts()
         NewServiceCall()
     End Sub
@@ -82,16 +36,16 @@ Public Class ApplicationController : Inherits NotifyBase
     Public Sub NewServiceCall()
         SrvCall = New ServiceCall()
         SrvCall.Customer = New Customer()
+        SrvCall.Customer.Location = New Location()
+        SrvCall.Customer.Location.Phones = New ObservableCollection(Of Phone)
         SrvCall.CallLocation = New CallLocation()
         SrvCall.Statuses = New ObservableCollection(Of Status)
     End Sub
 
     Public Sub InitializeProviders()
-        ProviderList.Add(New Provider With {.ID = 0, .CompanyName = "Provider1", .Website = "site1", .Email = "@email1", .Location = New Location With {.ID = 0, .Address = "123 overthere", .City = "city1", .State = "state1", .Zip = 12345}})
-    End Sub
-
-    Public Sub InitializeCustomers()
-        CustomerList.Add(New Customer With {.ID = 0, .FirstName = "First1", .LastName = "Last1", .Location = New Location With {.ID = 0, .Address = "CustAddr1", .City = "CustCity1", .State = "CustST", .Zip = "CustZip1"}})
+        ProviderList.Add(New Provider With {.ID = 0, .CompanyName = "Provider1", .Website = "site1", .Email = "@email1", .Location = New Location With {.ID = 0, .Address = "123 overthere", .City = "city1", .State = "S1", .Zip = 12345}})
+        ProviderList.Add(New Provider With {.ID = 0, .CompanyName = "Provider2", .Website = "site2", .Email = "@email2", .Location = New Location With {.ID = 0, .Address = "223 overthere", .City = "city2", .State = "S2", .Zip = 12345}})
+        ProviderList.Add(New Provider With {.ID = 0, .CompanyName = "Provider3", .Website = "site3", .Email = "@email3", .Location = New Location With {.ID = 0, .Address = "323 overthere", .City = "city3", .State = "S3", .Zip = 12345}})
     End Sub
 
     Public Sub InitializeContacts()

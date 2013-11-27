@@ -45,4 +45,15 @@
         End Set
     End Property
 
+    Private _provider As Provider
+    Public Property Provider() As Provider
+        Get
+            Return _provider
+        End Get
+        Set(ByVal value As Provider)
+            _provider = value
+            Notify("Provider")
+        End Set
+    End Property
+
 End Class
