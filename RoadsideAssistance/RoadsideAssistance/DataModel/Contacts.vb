@@ -10,14 +10,13 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class People
+Partial Public Class Contacts
+    Public Property PersonId As Integer
+    Public Property ProviderId As Integer
+    Public Property Title As String
     Public Property Id As Integer
-    Public Property FirstName As String
-    Public Property LastName As String
-    Public Property Email As String
 
-    Public Overridable Property Contacts As ICollection(Of Contacts) = New HashSet(Of Contacts)
-    Public Overridable Property Customers As ICollection(Of Customers) = New HashSet(Of Customers)
-    Public Overridable Property Phones As ICollection(Of Phones) = New HashSet(Of Phones)
+    Public Overridable Property People As People
+    Public Overridable Property Providers As ICollection(Of Providers) = New HashSet(Of Providers)
 
 End Class

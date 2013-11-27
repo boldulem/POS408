@@ -99,54 +99,54 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controller\ApplicationController.vb" />
-    <Compile Include="Manager\DataManager.vb" />
-    <Compile Include="Models\Contact.vb" />
-    <Compile Include="Models\Contacts.vb">
+    <Compile Include="DataModel\Contacts.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Customer.vb" />
-    <Compile Include="Models\Customers.vb">
+    <Compile Include="DataModel\Customers.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Location.vb" />
-    <Compile Include="Models\Locations.vb">
+    <Compile Include="DataModel\Locations.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\People.vb">
+    <Compile Include="DataModel\People.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Person.vb" />
-    <Compile Include="Models\Phone.vb" />
-    <Compile Include="Models\Phones.vb">
+    <Compile Include="DataModel\Phones.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Provider.vb" />
-    <Compile Include="Models\Providers.vb">
+    <Compile Include="DataModel\Providers.vb">
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Roadside.Context.vb">
+    <Compile Include="DataModel\Roadside.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Roadside.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Roadside.Designer.vb">
+    <Compile Include="DataModel\Roadside.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Roadside.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Roadside.vb">
+    <Compile Include="DataModel\Roadside.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Roadside.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\ServiceCalls.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Statuses.vb">
+      <DependentUpon>Roadside.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DataManager.vb" />
+    <Compile Include="Models\Contact.vb" />
+    <Compile Include="Models\Customer.vb" />
+    <Compile Include="Models\Location.vb" />
+    <Compile Include="Models\Person.vb" />
+    <Compile Include="Models\Phone.vb" />
+    <Compile Include="Models\Provider.vb" />
     <Compile Include="Models\ServiceCall.vb" />
-    <Compile Include="Models\ServiceCalls.vb">
-      <DependentUpon>Roadside.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Status.vb" />
-    <Compile Include="Models\Statuses.vb">
-      <DependentUpon>Roadside.tt</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainWindow.xaml.vb">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -195,19 +195,19 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\Roadside.edmx">
+    <EntityDeploy Include="DataModel\Roadside.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Roadside.Designer.vb</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\Roadside.Context.tt">
+    <None Include="DataModel\Roadside.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Roadside.edmx</DependentUpon>
       <LastGenOutput>Roadside.Context.vb</LastGenOutput>
     </None>
-    <None Include="Models\Roadside.edmx.diagram">
+    <None Include="DataModel\Roadside.edmx.diagram">
       <DependentUpon>Roadside.edmx</DependentUpon>
     </None>
-    <None Include="Models\Roadside.tt">
+    <None Include="DataModel\Roadside.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Roadside.edmx</DependentUpon>
       <LastGenOutput>Roadside.vb</LastGenOutput>

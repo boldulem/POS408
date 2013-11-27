@@ -22,6 +22,14 @@
           <Property Name="LocationId" Type="int" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="LocationPhones">
+          <Key>
+            <PropertyRef Name="LocationId" />
+            <PropertyRef Name="PhoneId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="PhoneId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Locations">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,14 +50,6 @@
           <Property Name="FirstName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="PeoplePhones">
-          <Key>
-            <PropertyRef Name="PhoneId" />
-            <PropertyRef Name="PersonId" />
-          </Key>
-          <Property Name="PhoneId" Type="int" Nullable="false" />
-          <Property Name="PersonId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Phones">
           <Key>
@@ -76,7 +76,6 @@
           <Property Name="Website" Type="varchar" MaxLength="100" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="LocationID" Type="int" Nullable="false" />
-          <Property Name="ContactID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiceCalls">
           <Key>
@@ -138,26 +137,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PeoplePhones_ToPeople">
-          <End Role="People" Type="Self.People" Multiplicity="1" />
-          <End Role="PeoplePhones" Type="Self.PeoplePhones" Multiplicity="*" />
+        <Association Name="FK_LocationPhones_ToLocations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="LocationPhones" Type="Self.LocationPhones" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="People">
+            <Principal Role="Locations">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PeoplePhones">
-              <PropertyRef Name="PersonId" />
+            <Dependent Role="LocationPhones">
+              <PropertyRef Name="LocationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PeoplePhones_ToPhone">
+        <Association Name="FK_LocationPhones_ToPhones">
           <End Role="Phones" Type="Self.Phones" Multiplicity="1" />
-          <End Role="PeoplePhones" Type="Self.PeoplePhones" Multiplicity="*" />
+          <End Role="LocationPhones" Type="Self.LocationPhones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Phones">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PeoplePhones">
+            <Dependent Role="LocationPhones">
               <PropertyRef Name="PhoneId" />
             </Dependent>
           </ReferentialConstraint>
@@ -249,9 +248,9 @@
         <EntityContainer Name="RoadsideModelStoreContainer">
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationPhones" EntityType="Self.LocationPhones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PeoplePhones" EntityType="Self.PeoplePhones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phones" EntityType="Self.Phones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProviderContacts" EntityType="Self.ProviderContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Providers" EntityType="Self.Providers" Schema="dbo" store:Type="Tables" />
@@ -269,13 +268,13 @@
             <End Role="People" EntitySet="People" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK_PeoplePhones_ToPeople" Association="Self.FK_PeoplePhones_ToPeople">
-            <End Role="People" EntitySet="People" />
-            <End Role="PeoplePhones" EntitySet="PeoplePhones" />
+          <AssociationSet Name="FK_LocationPhones_ToLocations" Association="Self.FK_LocationPhones_ToLocations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="LocationPhones" EntitySet="LocationPhones" />
           </AssociationSet>
-          <AssociationSet Name="FK_PeoplePhones_ToPhone" Association="Self.FK_PeoplePhones_ToPhone">
+          <AssociationSet Name="FK_LocationPhones_ToPhones" Association="Self.FK_LocationPhones_ToPhones">
             <End Role="Phones" EntitySet="Phones" />
-            <End Role="PeoplePhones" EntitySet="PeoplePhones" />
+            <End Role="LocationPhones" EntitySet="LocationPhones" />
           </AssociationSet>
           <AssociationSet Name="FK_ProviderContacts_ToContacts" Association="Self.FK_ProviderContacts_ToContacts">
             <End Role="Contacts" EntitySet="Contacts" />
@@ -319,7 +318,7 @@
           <Property Name="ProviderId" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_Contacts_ToPeople" FromRole="Contacts" ToRole="People" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Contacts_ToPeople" FromRole="Contacts" ToRole="People" />
           <NavigationProperty Name="Providers" Relationship="Self.ProviderContacts" FromRole="Contacts" ToRole="Providers" />
         </EntityType>
         <EntityType Name="Customers">
@@ -329,8 +328,8 @@
           <Property Name="PersonId" Type="Int32" Nullable="false" />
           <Property Name="LocationId" Type="Int32" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Location" Relationship="Self.FK_Customers_ToLocation" FromRole="Customers" ToRole="Locations" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_Customers_ToPeople" FromRole="Customers" ToRole="People" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK_Customers_ToLocation" FromRole="Customers" ToRole="Locations" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Customers_ToPeople" FromRole="Customers" ToRole="People" />
           <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_ServiceCalls_ToCustomer" FromRole="Customers" ToRole="ServiceCalls" />
         </EntityType>
         <EntityType Name="Locations">
@@ -347,6 +346,7 @@
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToLocation" FromRole="Locations" ToRole="Customers" />
           <NavigationProperty Name="Providers" Relationship="Self.FK_Providers_ToLocations" FromRole="Locations" ToRole="Providers" />
           <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_ServiceCalls_ToLocation" FromRole="Locations" ToRole="ServiceCalls" />
+          <NavigationProperty Name="Phones" Relationship="Self.LocationPhones" FromRole="Locations" ToRole="Phones" />
         </EntityType>
         <EntityType Name="People">
           <Key>
@@ -358,7 +358,6 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Contacts" Relationship="Self.FK_Contacts_ToPeople" FromRole="People" ToRole="Contacts" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToPeople" FromRole="People" ToRole="Customers" />
-          <NavigationProperty Name="Phones" Relationship="Self.PeoplePhones" FromRole="People" ToRole="Phones" />
         </EntityType>
         <EntityType Name="Phones">
           <Key>
@@ -367,7 +366,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="Int64" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="People" Relationship="Self.PeoplePhones" FromRole="Phones" ToRole="People" />
+          <NavigationProperty Name="Locations" Relationship="Self.LocationPhones" FromRole="Phones" ToRole="Locations" />
         </EntityType>
         <EntityType Name="Providers">
           <Key>
@@ -378,8 +377,7 @@
           <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="ContactID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Location" Relationship="Self.FK_Providers_ToLocations" FromRole="Providers" ToRole="Locations" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK_Providers_ToLocations" FromRole="Providers" ToRole="Locations" />
           <NavigationProperty Name="Statuses" Relationship="Self.FK_Statuses_ToProvider" FromRole="Providers" ToRole="Statuses" />
           <NavigationProperty Name="Contacts" Relationship="Self.ProviderContacts" FromRole="Providers" ToRole="Contacts" />
         </EntityType>
@@ -395,8 +393,8 @@
           <Property Name="Issue" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_ServiceCalls_ToCustomer" FromRole="ServiceCalls" ToRole="Customers" />
-          <NavigationProperty Name="Location" Relationship="Self.FK_ServiceCalls_ToLocation" FromRole="ServiceCalls" ToRole="Locations" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_ServiceCalls_ToCustomer" FromRole="ServiceCalls" ToRole="Customers" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK_ServiceCalls_ToLocation" FromRole="ServiceCalls" ToRole="Locations" />
           <NavigationProperty Name="Statuses" Relationship="Self.FK_Statuses_ToServiceCall" FromRole="ServiceCalls" ToRole="Statuses" />
         </EntityType>
         <EntityType Name="Statuses">
@@ -407,14 +405,14 @@
           <Property Name="ServiceCall_Id" Type="Int32" Nullable="false" />
           <Property Name="ProviderID" Type="Int32" Nullable="false" />
           <Property Name="TimeOf" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Status1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Provider" Relationship="Self.FK_Statuses_ToProvider" FromRole="Statuses" ToRole="Providers" />
-          <NavigationProperty Name="ServiceCall" Relationship="Self.FK_Statuses_ToServiceCall" FromRole="Statuses" ToRole="ServiceCalls" />
+          <NavigationProperty Name="Providers" Relationship="Self.FK_Statuses_ToProvider" FromRole="Statuses" ToRole="Providers" />
+          <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_Statuses_ToServiceCall" FromRole="Statuses" ToRole="ServiceCalls" />
         </EntityType>
         <Association Name="FK_Contacts_ToPeople">
-          <End Role="People" Type="RoadsideModel.People" Multiplicity="1" />
-          <End Role="Contacts" Type="RoadsideModel.Contacts" Multiplicity="*" />
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="People">
               <PropertyRef Name="Id" />
@@ -425,8 +423,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customers_ToLocation">
-          <End Role="Locations" Type="RoadsideModel.Locations" Multiplicity="1" />
-          <End Role="Customers" Type="RoadsideModel.Customers" Multiplicity="*" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
               <PropertyRef Name="Id" />
@@ -437,8 +435,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customers_ToPeople">
-          <End Role="People" Type="RoadsideModel.People" Multiplicity="1" />
-          <End Role="Customers" Type="RoadsideModel.Customers" Multiplicity="*" />
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="People">
               <PropertyRef Name="Id" />
@@ -449,8 +447,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ServiceCalls_ToCustomer">
-          <End Role="Customers" Type="RoadsideModel.Customers" Multiplicity="1" />
-          <End Role="ServiceCalls" Type="RoadsideModel.ServiceCalls" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id" />
@@ -461,8 +459,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Providers_ToLocations">
-          <End Role="Locations" Type="RoadsideModel.Locations" Multiplicity="1" />
-          <End Role="Providers" Type="RoadsideModel.Providers" Multiplicity="*" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
               <PropertyRef Name="Id" />
@@ -473,8 +471,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ServiceCalls_ToLocation">
-          <End Role="Locations" Type="RoadsideModel.Locations" Multiplicity="1" />
-          <End Role="ServiceCalls" Type="RoadsideModel.ServiceCalls" Multiplicity="*" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
               <PropertyRef Name="Id" />
@@ -485,8 +483,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Statuses_ToProvider">
-          <End Role="Providers" Type="RoadsideModel.Providers" Multiplicity="1" />
-          <End Role="Statuses" Type="RoadsideModel.Statuses" Multiplicity="*" />
+          <End Role="Providers" Type="Self.Providers" Multiplicity="1" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Providers">
               <PropertyRef Name="Id" />
@@ -497,8 +495,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Statuses_ToServiceCall">
-          <End Role="ServiceCalls" Type="RoadsideModel.ServiceCalls" Multiplicity="1" />
-          <End Role="Statuses" Type="RoadsideModel.Statuses" Multiplicity="*" />
+          <End Role="ServiceCalls" Type="Self.ServiceCalls" Multiplicity="1" />
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ServiceCalls">
               <PropertyRef Name="Id" />
@@ -508,62 +506,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PeoplePhones">
-          <End Role="People" Type="RoadsideModel.People" Multiplicity="*" />
-          <End Role="Phones" Type="RoadsideModel.Phones" Multiplicity="*" />
+        <Association Name="LocationPhones">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
+          <End Role="Phones" Type="Self.Phones" Multiplicity="*" />
         </Association>
         <Association Name="ProviderContacts">
-          <End Role="Contacts" Type="RoadsideModel.Contacts" Multiplicity="*" />
-          <End Role="Providers" Type="RoadsideModel.Providers" Multiplicity="*" />
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+          <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
         </Association>
         <EntityContainer Name="RoadsideEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Contacts1" EntityType="RoadsideModel.Contacts" />
-          <EntitySet Name="Customers1" EntityType="RoadsideModel.Customers" />
-          <EntitySet Name="Locations1" EntityType="RoadsideModel.Locations" />
-          <EntitySet Name="People1" EntityType="RoadsideModel.People" />
-          <EntitySet Name="Phones1" EntityType="RoadsideModel.Phones" />
-          <EntitySet Name="Providers1" EntityType="RoadsideModel.Providers" />
-          <EntitySet Name="ServiceCalls1" EntityType="RoadsideModel.ServiceCalls" />
-          <EntitySet Name="Statuses" EntityType="RoadsideModel.Statuses" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" />
+          <EntitySet Name="People" EntityType="Self.People" />
+          <EntitySet Name="Phones" EntityType="Self.Phones" />
+          <EntitySet Name="Providers" EntityType="Self.Providers" />
+          <EntitySet Name="ServiceCalls" EntityType="Self.ServiceCalls" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" />
           <AssociationSet Name="FK_Contacts_ToPeople" Association="Self.FK_Contacts_ToPeople">
-            <End Role="People" EntitySet="People1" />
-            <End Role="Contacts" EntitySet="Contacts1" />
+            <End Role="People" EntitySet="People" />
+            <End Role="Contacts" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_ToLocation" Association="Self.FK_Customers_ToLocation">
-            <End Role="Locations" EntitySet="Locations1" />
-            <End Role="Customers" EntitySet="Customers1" />
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_ToPeople" Association="Self.FK_Customers_ToPeople">
-            <End Role="People" EntitySet="People1" />
-            <End Role="Customers" EntitySet="Customers1" />
+            <End Role="People" EntitySet="People" />
+            <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_ServiceCalls_ToCustomer" Association="Self.FK_ServiceCalls_ToCustomer">
-            <End Role="Customers" EntitySet="Customers1" />
-            <End Role="ServiceCalls" EntitySet="ServiceCalls1" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ServiceCalls" EntitySet="ServiceCalls" />
           </AssociationSet>
           <AssociationSet Name="FK_Providers_ToLocations" Association="Self.FK_Providers_ToLocations">
-            <End Role="Locations" EntitySet="Locations1" />
-            <End Role="Providers" EntitySet="Providers1" />
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Providers" EntitySet="Providers" />
           </AssociationSet>
           <AssociationSet Name="FK_ServiceCalls_ToLocation" Association="Self.FK_ServiceCalls_ToLocation">
-            <End Role="Locations" EntitySet="Locations1" />
-            <End Role="ServiceCalls" EntitySet="ServiceCalls1" />
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="ServiceCalls" EntitySet="ServiceCalls" />
           </AssociationSet>
           <AssociationSet Name="FK_Statuses_ToProvider" Association="Self.FK_Statuses_ToProvider">
-            <End Role="Providers" EntitySet="Providers1" />
+            <End Role="Providers" EntitySet="Providers" />
             <End Role="Statuses" EntitySet="Statuses" />
           </AssociationSet>
           <AssociationSet Name="FK_Statuses_ToServiceCall" Association="Self.FK_Statuses_ToServiceCall">
-            <End Role="ServiceCalls" EntitySet="ServiceCalls1" />
+            <End Role="ServiceCalls" EntitySet="ServiceCalls" />
             <End Role="Statuses" EntitySet="Statuses" />
           </AssociationSet>
-          <AssociationSet Name="PeoplePhones" Association="Self.PeoplePhones">
-            <End Role="People" EntitySet="People1" />
-            <End Role="Phones" EntitySet="Phones1" />
+          <AssociationSet Name="LocationPhones" Association="Self.LocationPhones">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Phones" EntitySet="Phones" />
           </AssociationSet>
           <AssociationSet Name="ProviderContacts" Association="Self.ProviderContacts">
-            <End Role="Contacts" EntitySet="Contacts1" />
-            <End Role="Providers" EntitySet="Providers1" />
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Providers" EntitySet="Providers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -572,7 +570,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RoadsideModelStoreContainer" CdmEntityContainer="RoadsideEntities">
-          <EntitySetMapping Name="Contacts1">
+          <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="RoadsideModel.Contacts">
               <MappingFragment StoreEntitySet="Contacts">
                 <ScalarProperty Name="PersonId" ColumnName="PersonId" />
@@ -582,7 +580,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customers1">
+          <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="RoadsideModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="PersonId" ColumnName="PersonId" />
@@ -591,7 +589,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Locations1">
+          <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="RoadsideModel.Locations">
               <MappingFragment StoreEntitySet="Locations">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -604,7 +602,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="People1">
+          <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="RoadsideModel.People">
               <MappingFragment StoreEntitySet="People">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -614,7 +612,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Phones1">
+          <EntitySetMapping Name="Phones">
             <EntityTypeMapping TypeName="RoadsideModel.Phones">
               <MappingFragment StoreEntitySet="Phones">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -623,7 +621,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Providers1">
+          <EntitySetMapping Name="Providers">
             <EntityTypeMapping TypeName="RoadsideModel.Providers">
               <MappingFragment StoreEntitySet="Providers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -631,11 +629,10 @@
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ServiceCalls1">
+          <EntitySetMapping Name="ServiceCalls">
             <EntityTypeMapping TypeName="RoadsideModel.ServiceCalls">
               <MappingFragment StoreEntitySet="ServiceCalls">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -656,14 +653,14 @@
                 <ScalarProperty Name="ServiceCall_Id" ColumnName="ServiceCall_Id" />
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
                 <ScalarProperty Name="TimeOf" ColumnName="TimeOf" />
-                <ScalarProperty Name="Status1" ColumnName="Status" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="PeoplePhones" TypeName="RoadsideModel.PeoplePhones" StoreEntitySet="PeoplePhones">
-            <EndProperty Name="People">
-              <ScalarProperty Name="Id" ColumnName="PersonId" />
+          <AssociationSetMapping Name="LocationPhones" TypeName="RoadsideModel.LocationPhones" StoreEntitySet="LocationPhones">
+            <EndProperty Name="Locations">
+              <ScalarProperty Name="Id" ColumnName="LocationId" />
             </EndProperty>
             <EndProperty Name="Phones">
               <ScalarProperty Name="Id" ColumnName="PhoneId" />
@@ -691,7 +688,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -22,13 +22,13 @@ Partial Public Class RoadsideEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property Contacts1() As DbSet(Of Contacts)
-    Public Overridable Property Customers1() As DbSet(Of Customers)
-    Public Overridable Property Locations1() As DbSet(Of Locations)
-    Public Overridable Property People1() As DbSet(Of People)
-    Public Overridable Property Phones1() As DbSet(Of Phones)
-    Public Overridable Property Providers1() As DbSet(Of Providers)
-    Public Overridable Property ServiceCalls1() As DbSet(Of ServiceCalls)
+    Public Overridable Property Contacts() As DbSet(Of Contacts)
+    Public Overridable Property Customers() As DbSet(Of Customers)
+    Public Overridable Property Locations() As DbSet(Of Locations)
+    Public Overridable Property People() As DbSet(Of People)
+    Public Overridable Property Phones() As DbSet(Of Phones)
+    Public Overridable Property Providers() As DbSet(Of Providers)
+    Public Overridable Property ServiceCalls() As DbSet(Of ServiceCalls)
     Public Overridable Property Statuses() As DbSet(Of Statuses)
 
 End Class

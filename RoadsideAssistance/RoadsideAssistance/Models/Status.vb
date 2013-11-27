@@ -1,5 +1,9 @@
 ﻿Public Class Status : Inherits NotifyBase
 
+    Public Sub New()
+        Provider = New Provider()
+    End Sub
+
     Private _id As Integer
     Public Property ID() As Integer
         Get
@@ -8,6 +12,16 @@
         Set(ByVal value As Integer)
             _id = value
             Notify("ID")
+        End Set
+    End Property
+
+    Private _serviceCallID As Integer
+    Public Property ServiceCallID() As Integer
+        Get
+            Return _serviceCallID
+        End Get
+        Set(ByVal value As Integer)
+            _serviceCallID = value
         End Set
     End Property
 

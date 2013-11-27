@@ -20,8 +20,8 @@ Partial Public Class ServiceCalls
     Public Property Description As String
     Public Property LocationID As Integer
 
-    Public Overridable Property Customer As Customers
-    Public Overridable Property Location As Locations
+    Public Overridable Property Customers As Customers
+    Public Overridable Property Locations As Locations
     Public Overridable Property Statuses As ICollection(Of Statuses) = New HashSet(Of Statuses)
 
 End Class

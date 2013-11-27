@@ -10,13 +10,18 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Customers
-    Public Property PersonId As Integer
-    Public Property LocationId As Integer
+Partial Public Class Locations
     Public Property Id As Integer
+    Public Property Address As String
+    Public Property City As String
+    Public Property State As String
+    Public Property Zip As String
+    Public Property Latitude As Nullable(Of Decimal)
+    Public Property Longitude As Nullable(Of Decimal)
 
-    Public Overridable Property Location As Locations
-    Public Overridable Property Person As People
+    Public Overridable Property Customers As ICollection(Of Customers) = New HashSet(Of Customers)
+    Public Overridable Property Providers As ICollection(Of Providers) = New HashSet(Of Providers)
     Public Overridable Property ServiceCalls As ICollection(Of ServiceCalls) = New HashSet(Of ServiceCalls)
+    Public Overridable Property Phones As ICollection(Of Phones) = New HashSet(Of Phones)
 
 End Class

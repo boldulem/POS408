@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="536d5eccee364eca9167fd91c66d09e1" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="RoadsideModel.Contacts" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.Customers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.Locations" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.People" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.Phones" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.Providers" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.ServiceCalls" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RoadsideModel.Statuses" Width="1.5" PointX="8.375" PointY="4.375" IsExpanded="true" />
+      <Diagram DiagramId="5198ab2f19594a198e54e8913575b4b1" Name="Diagram1">
+        <EntityTypeShape EntityType="RoadsideModel.Contacts" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.Customers" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.Locations" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.People" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.Phones" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.Providers" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.ServiceCalls" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RoadsideModel.Statuses" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="RoadsideModel.FK_Contacts_ToPeople" ManuallyRouted="false" />
         <AssociationConnector Association="RoadsideModel.FK_Customers_ToLocation" ManuallyRouted="false" />
         <AssociationConnector Association="RoadsideModel.FK_Customers_ToPeople" ManuallyRouted="false" />
@@ -21,7 +21,7 @@
         <AssociationConnector Association="RoadsideModel.FK_ServiceCalls_ToLocation" ManuallyRouted="false" />
         <AssociationConnector Association="RoadsideModel.FK_Statuses_ToProvider" ManuallyRouted="false" />
         <AssociationConnector Association="RoadsideModel.FK_Statuses_ToServiceCall" ManuallyRouted="false" />
-        <AssociationConnector Association="RoadsideModel.PeoplePhones" ManuallyRouted="false" />
+        <AssociationConnector Association="RoadsideModel.LocationPhones" ManuallyRouted="false" />
         <AssociationConnector Association="RoadsideModel.ProviderContacts" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

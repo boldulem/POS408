@@ -10,11 +10,13 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Phones
+Partial Public Class Customers
+    Public Property PersonId As Integer
+    Public Property LocationId As Integer
     Public Property Id As Integer
-    Public Property Number As Long
-    Public Property Type As String
 
-    Public Overridable Property People As ICollection(Of People) = New HashSet(Of People)
+    Public Overridable Property Locations As Locations
+    Public Overridable Property People As People
+    Public Overridable Property ServiceCalls As ICollection(Of ServiceCalls) = New HashSet(Of ServiceCalls)
 
 End Class
