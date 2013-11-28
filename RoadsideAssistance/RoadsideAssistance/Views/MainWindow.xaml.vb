@@ -22,7 +22,7 @@
 
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
         _appControl.ServiceCalls.Add(_appControl.SrvCall)
-        MessageBox.Show("Save button.")
+        _appControl.SaveServiceCall()
     End Sub
 
     Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)

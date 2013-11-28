@@ -1,8 +1,6 @@
 C:\Users\StevenCline\Documents\User-Made\University of Phoenix\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.exe.config
 C:\Users\StevenCline\Documents\GitHub\POS408_TeamB\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.exe.config
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.exe.config
-C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\Roadside.mdf
-C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\Roadside_log.ldf
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.exe
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.pdb
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\RoadsideAssistance.xml
@@ -22,3 +20,5 @@ C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistan
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Views\MainWindow.baml
 C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\obj\Debug\Views\MainWindow.g.vb
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\Roadside.mdf
+C:\Users\StevenCline\Documents\GitHub\POS408\RoadsideAssistance\RoadsideAssistance\bin\Debug\Roadside_log.ldf

@@ -68,6 +68,7 @@ Public Class Location : Inherits NotifyBase
         End Get
         Set(ByVal value As ObservableCollection(Of Phone))
             _phones = value
+            Notify("Phones")
         End Set
     End Property
 

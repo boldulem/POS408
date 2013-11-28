@@ -2,175 +2,186 @@
 
 Public Class DataManager
 
-    Public Sub AddCustomer(ByVal _customer As Customer)
-        Try 'Saves to db
-            Dim ctx As RoadsideEntities = New RoadsideEntities()
-            Dim customerData As Customers = New Customers()
+    Public Sub AddServiceCall(ByVal aServiceCall As ServiceCall)
+        Using ctx As New RoadsideEntities
+            Try
+                Dim scData As ServiceCalls = New ServiceCalls
+                Dim locData As Locations = New Locations
+                Dim personData As People = New People
+                Dim callLocData As Locations = New Locations
+                Dim custData As Customers = New Customers
+                Dim phoneData As Phones
+                Dim statusData As Statuses
+                Dim providerData As Providers
 
-            customerData.LocationId = _customer.Location.ID
-            customerData.PersonId = _customer.CustomerID
+                Dim results = ctx.ServiceCalls.FirstOrDefault(Function(x) x.Id = aServiceCall.ID)
 
-            ctx.Customers.Add(customerData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
+                If results Is Nothing Then
+                    scData.Contract = aServiceCall.Contract
+                    scData.Description = aServiceCall.Description
+                    scData.Equipment = aServiceCall.Equipment
+                    scData.Issue = aServiceCall.Issue
+                    scData.TimeOf = aServiceCall.TimeOf
+
+                    locData.Latitude = aServiceCall.CallLocation.Latitude
+                    locData.Longitude = aServiceCall.CallLocation.Longitude
+                    locData.Address = aServiceCall.CallLocation.Address
+                    locData.City = aServiceCall.CallLocation.City
+                    locData.State = aServiceCall.CallLocation.State
+                    locData.Zip = aServiceCall.CallLocation.Zip
+                    scData.Locations = locData
+
+                    locData = New Locations
+
+                    locData.Address = aServiceCall.Customer.Location.Address
+                    locData.City = aServiceCall.Customer.Location.City
+                    locData.State = aServiceCall.Customer.Location.State
+                    locData.Zip = aServiceCall.Customer.Location.Zip
+
+                    For Each aPhone As Phone In aServiceCall.Customer.Location.Phones
+                        phoneData = New Phones
+                        phoneData.Type = aPhone.Type
+                        phoneData.Number = aPhone.Number
+
+                        locData.Phones.Add(phoneData)
+                    Next
+
+                    personData.FirstName = aServiceCall.Customer.FirstName
+                    personData.LastName = aServiceCall.Customer.LastName
+                    personData.Email = aServiceCall.Customer.Email
+
+                    custData.People = personData
+                    custData.Locations = locData
+
+                    scData.Customers = custData
+
+                    For Each aStatus As Status In aServiceCall.Statuses
+                        statusData = New Statuses
+                        statusData.TimeOf = aStatus.TimeOf
+                        statusData.Status = aStatus.Status
+                        statusData.Comments = aStatus.Comments
+
+                        providerData = New Providers
+                        providerData.CompanyName = aStatus.Provider.CompanyName
+                        providerData.Email = aStatus.Provider.Email
+                        providerData.Website = aStatus.Provider.Website
+
+                        locData = New Locations
+
+                        locData.Address = aStatus.Provider.Location.Address
+                        locData.City = aStatus.Provider.Location.City
+                        locData.State = aStatus.Provider.Location.State
+                        locData.Zip = aStatus.Provider.Location.Zip
+                        providerData.Locations = locData
+                        statusData.Providers = providerData
+
+                        scData.Statuses.Add(statusData)
+                    Next
+
+                    ctx.ServiceCalls.Add(scData)
+                    ctx.SaveChanges()
+                    aServiceCall.ID = scData.Id
+                End If
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        End Using
     End Sub
-
-    Public Sub AddContact(ByVal _contact As Contact)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim contactData As Contacts = New Contacts
-
-            contactData.ProviderId = _contact.ID
-            contactData.PersonId = _contact.ContactID
-            contactData.Title = _contact.Title
-
-            ctx.Contacts.Add(contactData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-    Public Sub AddLocation(ByVal _location As Location)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim locData As Locations = New Locations
-
-            locData.Address = _location.Address
-            locData.City = _location.City
-            locData.State = _location.State
-            locData.Zip = _location.Zip
-
-            ctx.Locations.Add(locData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-    Public Sub AddPerson(ByVal _person As Person)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim peopleData As People = New People
-
-            peopleData.Email = _person.Email
-            peopleData.FirstName = _person.FirstName
-            peopleData.LastName = _person.LastName
-
-            ctx.People.Add(peopleData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-    Public Sub AddPhone(ByVal _phone As Phone)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim phoneData As Phones = New Phones
-
-            phoneData.Number = _phone.Number
-            phoneData.Type = _phone.Type
-
-            ctx.Phones.Add(phoneData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-
-    End Sub
-
-    Public Sub AddProvider(ByVal _provider As Provider)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim providerData As Providers = New Providers
-
-            providerData.LocationID = _provider.Location.ID
-            providerData.CompanyName = _provider.CompanyName
-            providerData.Contacts = _provider.Contacts
-            providerData.Email = _provider.Email
-            providerData.Website = _provider.Website
-
-            ctx.Providers.Add(providerData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-    Public Sub AddServiceCall(ByVal _serviceCall As ServiceCall)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim scData As ServiceCalls = New ServiceCalls
-
-            scData.LocationID = _serviceCall.CallLocation.ID
-            scData.CustomerID = _serviceCall.Customer.ID
-            scData.Contract = _serviceCall.Contract
-            scData.Description = _serviceCall.Description
-            scData.Equipment = _serviceCall.Equipment
-            scData.Issue = _serviceCall.Issue
-            scData.TimeOf = _serviceCall.TimeOf
-
-            ctx.ServiceCalls.Add(scData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-    Public Sub AddStatus(ByVal _status As Status)
-        Try
-            Dim ctx As RoadsideEntities = New RoadsideEntities
-            Dim statusData As Statuses = New Statuses()
-
-            statusData.ServiceCall_Id = _status.ServiceCallID
-            statusData.ProviderID = _status.Provider.ID
-            statusData.Comments = _status.Comments
-            statusData.Status = _status.Status
-            statusData.TimeOf = _status.TimeOf
-            ctx.Statuses.Add(statusData)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-    Public Function GetCustomers() As ObservableCollection(Of Customer)
-        Dim _customers As ObservableCollection(Of Customer) = New ObservableCollection(Of Customer)
-
-        Return _customers
-    End Function
-
-    Public Function GetContacts() As ObservableCollection(Of Contact)
-        Dim _contacts As ObservableCollection(Of Contact) = New ObservableCollection(Of Contact)
-
-        Return _contacts
-    End Function
-
-    Public Function GetLocations() As ObservableCollection(Of Location)
-        Dim _locations As ObservableCollection(Of Location) = New ObservableCollection(Of Location)
-
-        Return _locations
-    End Function
-
-    Public Function GetProviders() As ObservableCollection(Of Provider)
-        Dim _providers As ObservableCollection(Of Provider) = New ObservableCollection(Of Provider)
-
-        Return _Providers
-    End Function
 
     Public Function GetServiceCalls() As ObservableCollection(Of ServiceCall)
-        Dim _serviceCalls As ObservableCollection(Of ServiceCall) = New ObservableCollection(Of ServiceCall)
+        Dim aCustLoc As Location
+        Dim aPhone As Phone
+        Dim aCust As Customer
+        Dim aCallLoc As CallLocation
+        Dim aProvLoc As Location
+        Dim aProv As Provider
+        Dim aStatus As Status
+        Dim aStatuses As ObservableCollection(Of Status) = New ObservableCollection(Of Status)
+        Dim aServiceCall As ServiceCall
 
-        Return _serviceCalls
-    End Function
+        Dim aServiceCalls As ObservableCollection(Of ServiceCall) = New ObservableCollection(Of ServiceCall)
+        Using ctx As New RoadsideEntities()
+            Try
+                For Each scData As ServiceCalls In ctx.ServiceCalls
+                    aCustLoc = New Location
+                    aCust = New Customer
+                    aCallLoc = New CallLocation
+                    aServiceCall = New ServiceCall
 
-    Public Function GetStatuses() As ObservableCollection(Of Status)
-        Dim _statuses As ObservableCollection(Of Status) = New ObservableCollection(Of Status)
+                    For Each dbPhone As Phones In scData.Customers.Locations.Phones
+                        aPhone = New Phone
+                        aPhone.ID = dbPhone.Id
+                        aPhone.Number = dbPhone.Number
+                        aPhone.Type = dbPhone.Type
 
-        Return _statuses
+                        aCustLoc.Phones.Add(aPhone)
+                    Next
+                    aCustLoc.Address = scData.Customers.Locations.Address
+                    aCustLoc.City = scData.Customers.Locations.City
+                    aCustLoc.State = scData.Customers.Locations.State
+                    aCustLoc.Zip = scData.Customers.Locations.Zip
+
+                    aCust.Location = aCustLoc
+
+                    aCust.ID = scData.Customers.People.Id
+                    aCust.CustomerID = scData.Customers.Id
+                    aCust.FirstName = scData.Customers.People.FirstName
+                    aCust.LastName = scData.Customers.People.LastName
+                    aCust.Email = scData.Customers.People.Email
+
+                    aCallLoc.Latitude = scData.Locations.Latitude
+                    aCallLoc.Longitude = scData.Locations.Longitude
+                    aCallLoc.Address = scData.Locations.Address
+                    aCallLoc.City = scData.Locations.City
+                    aCallLoc.State = scData.Locations.State
+                    aCallLoc.Zip = scData.Locations.Zip
+
+                    For Each dbStatus As Statuses In scData.Statuses
+                        aStatus = New Status
+                        aProv = New Provider
+                        aProvLoc = New Location
+
+                        aProvLoc.Address = dbStatus.Providers.Locations.Address
+                        aProvLoc.City = dbStatus.Providers.Locations.City
+                        aProvLoc.State = dbStatus.Providers.Locations.State
+                        aProvLoc.Zip = dbStatus.Providers.Locations.Zip
+
+                        aProv.Location = aProvLoc
+
+                        aProv.ID = dbStatus.Providers.Id
+                        aProv.CompanyName = dbStatus.Providers.CompanyName
+                        aProv.Email = dbStatus.Providers.Email
+                        aProv.Website = dbStatus.Providers.Website
+
+                        aStatus.ID = dbStatus.Id
+                        aStatus.Comments = dbStatus.Comments
+                        aStatus.ServiceCallID = dbStatus.ServiceCall_Id
+                        aStatus.Status = dbStatus.Status
+                        aStatus.TimeOf = dbStatus.TimeOf
+                        aStatus.Provider = aProv
+
+                        aStatuses.Add(aStatus)
+                    Next
+
+                    aServiceCall.ID = scData.Id
+                    aServiceCall.Contract = scData.Contract
+                    aServiceCall.Description = scData.Description
+                    aServiceCall.Equipment = scData.Equipment
+                    aServiceCall.Issue = scData.Issue
+                    aServiceCall.TimeOf = scData.TimeOf
+
+                    aServiceCall.Customer = aCust
+                    aServiceCall.CallLocation = aCallLoc
+                    aServiceCall.Statuses = aStatuses
+
+                    aServiceCalls.Add(aServiceCall)
+                Next
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        End Using
+
+        Return aServiceCalls
     End Function
 
 End Class

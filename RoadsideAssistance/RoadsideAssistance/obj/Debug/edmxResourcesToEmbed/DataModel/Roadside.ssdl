@@ -7,7 +7,7 @@
     <Property Name="PersonId" Type="int" Nullable="false" />
     <Property Name="ProviderId" Type="int" Nullable="false" />
     <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Customers">
     <Key>
@@ -15,7 +15,7 @@
     </Key>
     <Property Name="PersonId" Type="int" Nullable="false" />
     <Property Name="LocationId" Type="int" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="LocationPhones">
     <Key>
@@ -29,7 +29,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
@@ -41,7 +41,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
@@ -50,7 +50,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Number" Type="bigint" Nullable="false" />
     <Property Name="Type" Type="varchar" MaxLength="14" />
   </EntityType>
@@ -66,7 +66,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CompanyName" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="Website" Type="varchar" MaxLength="100" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
@@ -76,7 +76,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TimeOf" Type="datetime" Nullable="false" />
     <Property Name="CustomerID" Type="int" Nullable="false" />
     <Property Name="Contract" Type="varchar" MaxLength="25" Nullable="false" />
@@ -89,7 +89,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ServiceCall_Id" Type="int" Nullable="false" />
     <Property Name="ProviderID" Type="int" Nullable="false" />
     <Property Name="TimeOf" Type="datetime" Nullable="false" />

@@ -7,7 +7,7 @@
     <Property Name="PersonId" Type="Int32" Nullable="false" />
     <Property Name="ProviderId" Type="Int32" Nullable="false" />
     <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="People" Relationship="Self.FK_Contacts_ToPeople" FromRole="Contacts" ToRole="People" />
     <NavigationProperty Name="Providers" Relationship="Self.ProviderContacts" FromRole="Contacts" ToRole="Providers" />
   </EntityType>
@@ -17,7 +17,7 @@
     </Key>
     <Property Name="PersonId" Type="Int32" Nullable="false" />
     <Property Name="LocationId" Type="Int32" Nullable="false" />
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Locations" Relationship="Self.FK_Customers_ToLocation" FromRole="Customers" ToRole="Locations" />
     <NavigationProperty Name="People" Relationship="Self.FK_Customers_ToPeople" FromRole="Customers" ToRole="People" />
     <NavigationProperty Name="ServiceCalls" Relationship="Self.FK_ServiceCalls_ToCustomer" FromRole="Customers" ToRole="ServiceCalls" />
@@ -26,7 +26,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
@@ -42,7 +42,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -53,7 +53,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Number" Type="Int64" Nullable="false" />
     <Property Name="Type" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Locations" Relationship="Self.LocationPhones" FromRole="Phones" ToRole="Locations" />
@@ -62,7 +62,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CompanyName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -75,7 +75,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TimeOf" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CustomerID" Type="Int32" Nullable="false" />
     <Property Name="Contract" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -91,7 +91,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ServiceCall_Id" Type="Int32" Nullable="false" />
     <Property Name="ProviderID" Type="Int32" Nullable="false" />
     <Property Name="TimeOf" Type="DateTime" Nullable="false" Precision="3" />

@@ -3,6 +3,7 @@
 Public Class ServiceCall : Inherits NotifyBase
 
     Public Sub New()
+        Customer = New Customer()
         CallLocation = New CallLocation()
         Statuses = New ObservableCollection(Of Status)
     End Sub
